@@ -10,9 +10,9 @@ class ProductService
     {
         $query = Product::query();
 
-        $query->when(isset($filter['name']), function ($query) use ($filter) {
-            $term = str($filter['name'])->trim();
-            $query->where('like', "%{$term}%");
+        $query->when(isset($filter['term']), function ($query) use ($filter) {
+            $name = str($filter['term'])->trim();
+            $query->where('name', 'like', "%{$name}%");
         });
 
         return $query->paginate(50);

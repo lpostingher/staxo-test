@@ -16,7 +16,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         return view('home.index', [
-            'products' => $this->productService->getList($request->input())
+            'products' => $this->productService->getList($request->input()),
+            'searchData' => $request->input()
         ]);
     }
 }
