@@ -83,4 +83,14 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function removeImage(string $product)
+    {
+        $this->productService->removeImage(decrypt($product));
+
+        return back()->with('flash_message', [
+            'status' => 'success',
+            'message' => 'Image removed successfully'
+        ]);
+    }
 }

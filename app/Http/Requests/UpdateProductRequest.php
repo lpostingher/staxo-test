@@ -24,7 +24,14 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'price' => 'nullable|numeric|between:0.00,9999999999999.99',
-            'image' => 'file|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'image' => 'nullable|file|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'price' => str_replace(',', '', $this->price)
+        ]);
     }
 }

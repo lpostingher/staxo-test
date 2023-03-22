@@ -37,8 +37,14 @@ class ProductService
 
     public function handleImage(string $productId, UploadedFile $file)
     {
-        $imagePath = $productId . '/image.' . $file->extension();
-        Storage::putFileAs('public/' . $productId, $file, 'image.' . $file->extension(), 'public');
-        return Storage::url($imagePath);
+        $path = Storage::disk('public')->putFile('images/products', $file);
+        return $path;
+    }
+
+    public function removeImage(int $id)
+    {
+        $product = $this->getById($id);
+        Storage::delete($product->image_path);
+        $product->update(['image_path' => null]);
     }
 }

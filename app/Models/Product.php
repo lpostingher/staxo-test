@@ -19,7 +19,10 @@ class Product extends Model
 
     public function getImageUrlAttribute(): string
     {
-        return $this->image_path ?? self::NO_IMAGE_PATH;
+        if ($this->image_path && Storage::disk('public')->exists($this->image_path)) {
+            return Storage::disk('local')->url($this->image_path);
+        }
+        return self::NO_IMAGE_PATH;
     }
 
     public function getPriceFormattedAttribute(): string
