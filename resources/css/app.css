@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: auto;
+    height: 1.2em;
+    white-space: nowrap;
+}

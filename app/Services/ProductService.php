@@ -17,4 +17,9 @@ class ProductService
 
         return $query->paginate(50);
     }
+
+    public function getById(int $id): Product
+    {
+        return Product::where('id', $id)->firstOrFail();
+    }
 }

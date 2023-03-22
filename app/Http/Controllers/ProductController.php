@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Services\ProductService;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        
+    public function __construct(
+        private readonly ProductService $productService
+    ) {
+        $this->middleware('auth')->except(['show']);
     }
 
     /**
@@ -40,9 +42,11 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(string $id)
     {
-        //
+        return view('product.show', [
+            'product' => $this->productService->getById(decrypt($id))
+        ]);
     }
 
     /**

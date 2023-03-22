@@ -5,7 +5,10 @@
                 name="term" {!! $attributes !!}>
         </div>
         <div class="col-sm-auto">
-            <input type="submit" value="Search" class="btn btn-sm btn-primary">
+            <button type="submit" class="btn btn-sm btn-primary">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
         </div>
     </div>
 </form>

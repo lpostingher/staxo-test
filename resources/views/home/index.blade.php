@@ -9,7 +9,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <x-search :value="$searchData['term']"></x-search>
+                    <x-search :value="$searchData['term'] ?? ''"></x-search>
+                    <p>Search returned {{ count($products) }} items</p>
+                    <hr>
+                    <div class="row">
+                        @foreach($products as $product)
+                        <div class="col-sm-3 mb-3">
+                            <x-product-card :$product></x-product-card>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
