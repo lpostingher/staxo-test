@@ -9,3 +9,12 @@
     height: 1.2em;
     white-space: nowrap;
 }
+
+.product-row{
+    vertical-align: middle;
+}
+
+.product-row-actions {
+    vertical-align: middle;
+    text-align: end;
+}

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->string('name', 255);
             $table->decimal('price', 15, 2)->nullable();
-            $table->string('image_url')->nullable();
+            $table->string('image_path')->nullable();
         });
     }
 

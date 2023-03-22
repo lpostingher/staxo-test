@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -18,9 +19,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return view('product.index', [
+            'products' => $this->productService->getList($request->input()) ?? []
+        ]);
     }
 
     /**
@@ -52,17 +55,25 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(string $id)
     {
-        //
+        return view('product.form', [
+            'product' => $this->productService->getById(decrypt($id)),
+            'formRoute' => route('product.update', $id),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, string $product)
     {
-        //
+        $input = $request->validated();
+        $this->productService->updateById(decrypt($product), $input, $request->file('image'));
+        return back()->with('flash_message', [
+            'status' => 'success',
+            'message' => 'Product updated successfully'
+        ]);
     }
 
     /**

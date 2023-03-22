@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Models\Product;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Console\Input\Input;
 
 class ProductService
 {
@@ -21,5 +24,21 @@ class ProductService
     public function getById(int $id): Product
     {
         return Product::where('id', $id)->firstOrFail();
+    }
+
+    public function updateById(int $id, array $input, ?UploadedFile $image)
+    {
+        if ($image) {
+            $input['image_path'] = $this->handleImage(encrypt($id), $image);
+        }
+        $product = Product::where('id', $id)->firstOrFail();
+        $product->update($input);
+    }
+
+    public function handleImage(string $productId, UploadedFile $file)
+    {
+        $imagePath = $productId . '/image.' . $file->extension();
+        Storage::putFileAs('public/' . $productId, $file, 'image.' . $file->extension(), 'public');
+        return Storage::url($imagePath);
     }
 }
