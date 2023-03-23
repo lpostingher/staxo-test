@@ -15,18 +15,9 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind('stripe', function () {
-            Stripe::setApiKey(config('services.stripe.api_key'));
-            $client = new Client([
-                'base_uri' => config('services.stripe.url'),
-                'http_errors' => false,
-                'timeout' => 10,
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                ],
-            ]);
+            Stripe::setApiKey(config('services.stripe.api_secret_key'));
 
-            return new StripeAdapter($client);
+            return new StripeAdapter();
         });
 
     }

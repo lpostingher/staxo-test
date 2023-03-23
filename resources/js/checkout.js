@@ -5,7 +5,15 @@ let elements;
 let emailAddress = '';
 
 if ($(".stripe").length) {
-    stripe = Stripe("pk_test_51MooUUFVQurkWp3CIuit8PGXZID3T2Pt1zZBSDgPByA8AXPB3KpHtpnNL7MeFdQLQrpzVB0yziK6YBI5zgKpuKNi00rZqhfmR8");
+
+    const {key} = await fetch('/stripe/fetchStripePublicKey', {
+        headers: {
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+    }).then((r) => r.json());
+
+    stripe = Stripe(key);
 
     initialize();
     checkStatus();
