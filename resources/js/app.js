@@ -15,3 +15,4 @@ import '@fortawesome/fontawesome-free/js/all.min.js';
 import 'jquery-mask-plugin';
 
 import './custom';
+import './checkout';

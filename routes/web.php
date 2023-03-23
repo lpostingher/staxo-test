@@ -25,5 +25,6 @@ Route::middleware('auth')->group(function () {
 });
 
 include 'product.php';
+include 'order.php';
 
 require __DIR__.'/auth.php';
