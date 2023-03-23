@@ -16,6 +16,8 @@ class ProductService
             $name = str($filter['term'])->trim();
             $query->where('name', 'like', "%{$name}%");
         });
+        
+        $query->orderBy('created_at', 'desc');
 
         return $query->paginate(10);
     }
@@ -51,5 +53,20 @@ class ProductService
     {
         $product = $this->getById($id);
         $product->delete();
+    }
+
+    public function create(): Product
+    {
+        return Product::make(['price' => 0]);
+    }
+
+    public function store(array $input, ?UploadedFile $image)
+    {
+        $product = Product::create($input);
+        if ($image) {
+            $product->update([
+                'image_path' => $this->handleImage(encrypt($product->id), $image)
+            ]);
+        }
     }
 }

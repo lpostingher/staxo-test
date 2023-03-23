@@ -31,7 +31,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.form', [
+            'product' => $this->productService->create(),
+            'formRoute' => route('product.store'),
+        ]);
     }
 
     /**
@@ -39,7 +42,11 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $this->productService->store($request->validated(), $request->file('image'));
+        return redirect()->route('product.index')->with('flash_message', [
+            'status' => 'success',
+            'message' => 'Product created successfully'
+        ]);
     }
 
     /**
