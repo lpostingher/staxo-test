@@ -57,6 +57,14 @@
                 </div>
             @endauth
 
+            @guest
+             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <x-nav-link :href="route('login')">
+                        {{ __('Restricted area') }}
+                    </x-nav-link>
+                </div>   
+            @endguest
+
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
