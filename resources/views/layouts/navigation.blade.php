@@ -42,6 +42,10 @@
                                 {{ __('Manage products') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('register')">
+                                {{ __('Register new user') }}
+                            </x-dropdown-link>
+
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
