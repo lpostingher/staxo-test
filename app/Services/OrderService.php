@@ -6,9 +6,9 @@ use App\Models\Order;
 
 class OrderService
 {
-    public function checkout(array $input)
+    public function checkout(array $input): Order
     {
-        Order::factory()->create([
+        return Order::factory()->create([
             'product_id' => decrypt($input['product_id']),
             'quantity' => $input['quantity'],
             'amount' => $input['amount'],

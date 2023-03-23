@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\CheckoutFinished;
+use App\Listeners\CheckoutFinishedNotification;
 use App\Models\Product;
 use App\Observers\ProductObserver;
 use Illuminate\Auth\Events\Registered;
@@ -20,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        CheckoutFinished::class => [
+            CheckoutFinishedNotification::class
+        ]
     ];
 
     /**

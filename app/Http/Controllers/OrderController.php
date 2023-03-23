@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CheckoutFinished;
 use App\Facades\StripeFacade;
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
@@ -58,7 +59,8 @@ class OrderController extends Controller
      */
     public function checkout(Request $request): RedirectResponse
     {
-        $this->orderService->checkout($request->query());
+        $order = $this->orderService->checkout($request->query());
+        CheckoutFinished::dispatch($order);
 
         return redirect()->route('order.finishCheckout')->with('flash_message', [
             'status' => 'success',

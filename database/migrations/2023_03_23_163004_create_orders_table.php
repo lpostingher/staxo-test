@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->integer('quantity');
             $table->decimal('amount', 15, 2);
             $table->string('email', 255);
