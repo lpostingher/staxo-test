@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    private const NO_IMAGE_PATH = '/img/no_image.png';
+    public const NO_IMAGE_PATH = '/img/no_image.png';
 
     protected $fillable = ['name', 'price', 'image_path'];
 
