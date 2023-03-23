@@ -44,7 +44,13 @@ class ProductService
     public function removeImage(int $id)
     {
         $product = $this->getById($id);
-        Storage::delete($product->image_path);
+        Storage::disk('public')->delete($product->image_path);
         $product->update(['image_path' => null]);
+    }
+
+    public function destroy(int $id)
+    {
+        $product = $this->getById($id);
+        $product->delete();
     }
 }

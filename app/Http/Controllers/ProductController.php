@@ -79,9 +79,13 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(string $product)
     {
-        //
+        $this->productService->destroy(decrypt($product));
+        return back()->with('flash_message', [
+            'status' => 'success',
+            'message' => 'Product removed successfully'
+        ]);
     }
 
     public function removeImage(string $product)

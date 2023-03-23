@@ -53,10 +53,12 @@
                             <div class="col-sm-auto">
                                 <img src="{{ $product->image_url }}" width="128">
                             </div>
-                            @if($product->image_path)
-                            <div class="col-sm-auto">
-                                <a href="{{ route('product.removeImage', encrypt($product->id)) }}">Remove image</a>
-                            </div>
+                            @if ($product->image_path)
+                                <div class="col-sm-auto">
+                                    <a href="{{ route('product.removeImage', encrypt($product->id)) }}"
+                                        onclick="return confirm('Are you sure  ou want to remove this image?');">Remove
+                                        image</a>
+                                </div>
                             @endif
                         </div>
                         <div class="row">
@@ -64,7 +66,8 @@
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                             <div class="col-sm-auto">
-                                <a href="{{ route('product.index') }}" role="button" class="btn btn-secondary">Cancel</a>
+                                <a href="{{ route('product.index') }}" role="button"
+                                    class="btn btn-secondary">Cancel</a>
                             </div>
                         </div>
                     </form>

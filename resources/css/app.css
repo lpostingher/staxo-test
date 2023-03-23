@@ -14,7 +14,7 @@
     vertical-align: middle;
 }
 
-.product-row-actions {
-    vertical-align: middle;
-    text-align: end;
+.product-row .row{
+    justify-items: end;
+    justify-content: end;
 }
