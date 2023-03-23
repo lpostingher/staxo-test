@@ -13,6 +13,7 @@
                     <p>Search returned {{ count($products) }} items</p>
                     <hr>
                     @include('product.partials.table')
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

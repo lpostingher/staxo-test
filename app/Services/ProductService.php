@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\Console\Input\Input;
 
 class ProductService
 {
@@ -18,7 +17,7 @@ class ProductService
             $query->where('name', 'like', "%{$name}%");
         });
 
-        return $query->paginate(50);
+        return $query->paginate(10);
     }
 
     public function getById(int $id): Product
