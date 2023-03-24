@@ -42,6 +42,12 @@ class OrderController extends Controller
             'quantity' => $request->quantity,
             'amount' => $request->quantity * $product->price,
             'email' => $request->email,
+            'redirectUrl' => $this->buildRedirectUrl(
+                encrypt($product->id),
+                $request->quantity,
+                $request->quantity * $product->price,
+                $request->email
+            ),
         ]);
     }
 
@@ -69,5 +75,27 @@ class OrderController extends Controller
     public function finishCheckout(): View
     {
         return view('order.finishCheckout');
+    }
+
+    /**
+     * Build redirect url fot automated payments
+     *
+     * @param string $productId
+     * @param int $quantity
+     * @param float $amount
+     * @param string $email
+     *
+     * @return string
+     */
+    private function buildRedirectUrl(string $productId, int $quantity, float $amount, string $email): string
+    {
+        $query = [
+          'product_id' => $productId,
+          'quantity' => $quantity,
+          'amount' => $amount,
+          'email' => $email
+        ];
+
+        return route('order.checkout', $query);
     }
 }

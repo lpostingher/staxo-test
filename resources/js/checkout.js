@@ -54,14 +54,11 @@ async function initialize() {
 async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    const productId = $('input[name="product_id"]').val();
-    const quantity = $('input[name="quantity"]').val();
-    const amount = $('input[name="amount"]').val();
-
+    const redirectUrl = $('input[name="redirectUrl"]').val();
     const response = await stripe.confirmPayment({
         elements,
         confirmParams: {
-            return_url: `http://127.0.0.1:8000/order/checkout?product_id=${productId}&quantity=${quantity}&amount=${amount}&email=${emailAddress}`,
+            return_url: redirectUrl,
         }
     });
 

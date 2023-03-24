@@ -36,10 +36,9 @@
                     <div class="row">
                         <div class="col-sm">
                             <form id="payment-form">
-                                <input type="hidden" name="product_id" value="{{encrypt($product->id)}}">
                                 <input type="hidden" name="amount" value="{{$amount}}">
-                                <input type="hidden" name="quantity" value="{{$quantity}}">
                                 <input type="hidden" name="email" value="{{$email}}">
+                                <input type="hidden" name="redirectUrl" value="{{$redirectUrl}}">
                                 <div id="link-authentication-element">
                                     <!--Stripe.js injects the Link Authentication Element-->
                                 </div>
