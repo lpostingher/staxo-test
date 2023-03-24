@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Adapters\StripeAdapterInterface;
 use App\Http\Requests\CreatePaymentIntentRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class StripeController extends Controller
 {
