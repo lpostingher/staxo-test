@@ -3,6 +3,7 @@
 namespace Adapters;
 
 use App\Adapters\StripeAdapter;
+use Stripe\PaymentIntent;
 use Tests\TestCase;
 
 /**
@@ -18,7 +19,7 @@ class StripeAdapterTest extends TestCase
     public function testCreatePaymentIntent(): void
     {
         $response = $this->instance->createPaymentIntent(100.50);
-        $this->assertArrayHasKey('clientSecret', $response);
+        $this->assertInstanceOf(PaymentIntent::class, $response);
     }
 
     /**
