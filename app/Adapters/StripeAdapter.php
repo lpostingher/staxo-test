@@ -23,7 +23,6 @@ class StripeAdapter implements StripeAdapterInterface
      */
     public function createPaymentIntent(float $amount): PaymentIntent
     {
-
         try {
             return PaymentIntent::create([
                 'amount' => $amount * 100,
@@ -37,7 +36,7 @@ class StripeAdapter implements StripeAdapterInterface
 
     public function confirmPaymentIntent(PaymentIntent $paymentIntent, PaymentMethod $paymentMethod): PaymentIntent
     {
-        if (!$paymentIntent->id) {
+        if (! $paymentIntent->id) {
             return new PaymentIntent();
         }
 
@@ -53,7 +52,7 @@ class StripeAdapter implements StripeAdapterInterface
     public function getPaymentMethod(): PaymentMethod
     {
         $method = PaymentMethod::all()->first();
-        if (!$method) {
+        if (! $method) {
             $method = PaymentMethod::create([
                 'type' => 'card',
                 'card' => [

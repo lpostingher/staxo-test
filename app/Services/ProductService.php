@@ -35,16 +35,10 @@ class ProductService implements ProductServiceInterface
     public function updateById(int $id, array $input, ?UploadedFile $image): void
     {
         if ($image) {
-            $input['image_path'] = $this->handleImage(encrypt($id), $image);
+            $input['image_path'] = $this->handleImage($image);
         }
         $product = Product::where('id', $id)->firstOrFail();
         $product->update($input);
-    }
-
-    private function handleImage(string $productId, UploadedFile $file)
-    {
-        $path = Storage::disk('public')->putFile('images/products', $file);
-        return $path;
     }
 
     /**
@@ -53,7 +47,7 @@ class ProductService implements ProductServiceInterface
     public function removeImage(int $id): void
     {
         $product = $this->getById($id);
-        if (!$product->image_path) {
+        if (! $product->image_path) {
             return;
         }
         Storage::disk('public')->delete($product->image_path);
@@ -84,9 +78,7 @@ class ProductService implements ProductServiceInterface
     {
         $product = Product::create($input);
         if ($image) {
-            $product->update([
-                'image_path' => $this->handleImage(encrypt($product->id), $image)
-            ]);
+            $product->update(['image_path' => $this->handleImage($image)]);
         }
     }
 
@@ -96,5 +88,17 @@ class ProductService implements ProductServiceInterface
     public function create(): Product
     {
         return Product::make(['price' => 0]);
+    }
+
+    /**
+     * Handle image upload
+     *
+     * @param UploadedFile $file
+     *
+     * @return false|string
+     */
+    private function handleImage(UploadedFile $file): bool|string
+    {
+        return Storage::disk('public')->putFile('images/products', $file);
     }
 }

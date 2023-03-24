@@ -14,7 +14,6 @@ class CheckoutFinishedNotification implements ShouldQueue
      */
     public function __construct()
     {
-        //
     }
 
     /**

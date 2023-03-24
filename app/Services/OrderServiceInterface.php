@@ -9,11 +9,11 @@ use App\Models\Order;
  */
 interface OrderServiceInterface
 {
-
     /**
      * Handle checkout
      *
      * @param array $input
+     *
      * @return Order
      */
     public function checkout(array $input): Order;

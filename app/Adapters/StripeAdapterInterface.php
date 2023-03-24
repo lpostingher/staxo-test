@@ -14,6 +14,7 @@ interface StripeAdapterInterface
      * Create payment intent
      *
      * @param float $amount
+     *
      * @return PaymentIntent
      */
     public function createPaymentIntent(float $amount): PaymentIntent;
@@ -22,7 +23,9 @@ interface StripeAdapterInterface
      * Confirm payment intent
      *
      * @param PaymentIntent $paymentIntent
-     * @return array
+     * @param PaymentMethod $paymentMethod
+     *
+     * @return PaymentIntent
      */
     public function confirmPaymentIntent(PaymentIntent $paymentIntent, PaymentMethod $paymentMethod): PaymentIntent;
 

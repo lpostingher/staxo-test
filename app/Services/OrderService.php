@@ -9,7 +9,6 @@ use App\Models\Order;
  */
 class OrderService implements OrderServiceInterface
 {
-
     /**
      * @inheritDoc
      */

@@ -30,8 +30,6 @@ class UpdateProductRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->merge([
-            'price' => str_replace(',', '', $this->price)
-        ]);
+        $this->merge(['price' => str_replace(',', '', $this->price)]);
     }
 }

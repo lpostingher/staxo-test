@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -22,7 +21,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         return view('product.index', [
-            'products' => $this->productService->getList($request->input()) ?? []
+            'products' => $this->productService->getList($request->input()) ?? [],
         ]);
     }
 
@@ -45,7 +44,7 @@ class ProductController extends Controller
         $this->productService->store($request->validated(), $request->file('image'));
         return redirect()->route('product.index')->with('flash_message', [
             'status' => 'success',
-            'message' => 'Product created successfully'
+            'message' => 'Product created successfully',
         ]);
     }
 
@@ -55,7 +54,7 @@ class ProductController extends Controller
     public function show(string $id)
     {
         return view('product.show', [
-            'product' => $this->productService->getById(decrypt($id))
+            'product' => $this->productService->getById(decrypt($id)),
         ]);
     }
 
@@ -79,7 +78,7 @@ class ProductController extends Controller
         $this->productService->updateById(decrypt($product), $input, $request->file('image'));
         return back()->with('flash_message', [
             'status' => 'success',
-            'message' => 'Product updated successfully'
+            'message' => 'Product updated successfully',
         ]);
     }
 
@@ -91,7 +90,7 @@ class ProductController extends Controller
         $this->productService->destroy(decrypt($product));
         return back()->with('flash_message', [
             'status' => 'success',
-            'message' => 'Product removed successfully'
+            'message' => 'Product removed successfully',
         ]);
     }
 
@@ -101,7 +100,7 @@ class ProductController extends Controller
 
         return back()->with('flash_message', [
             'status' => 'success',
-            'message' => 'Image removed successfully'
+            'message' => 'Image removed successfully',
         ]);
     }
 }

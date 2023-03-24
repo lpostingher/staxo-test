@@ -15,7 +15,6 @@ class ProductRow extends Component
     public function __construct(
         public Product $product
     ) {
-        //
     }
 
     /**

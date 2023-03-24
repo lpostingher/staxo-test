@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::resource('', HomeController::class)->only('index');
 
 Route::middleware('auth')->group(function () {

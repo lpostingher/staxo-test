@@ -39,7 +39,7 @@ class FinishPartialPayment implements ShouldQueue
         $method = $this->stripeAdapter->getPaymentMethod();
         $confirmation = $this->stripeAdapter->confirmPaymentIntent($intent, $method);
 
-        if ($confirmation->status == PaymentIntent::STATUS_SUCCEEDED) {
+        if ($confirmation->status === PaymentIntent::STATUS_SUCCEEDED) {
             $event->order->update(['amount_received' => $event->order->amount]);
             Mail::to($event->order->email)->queue(new FinishPartialPaymentMail($event->order));
         }

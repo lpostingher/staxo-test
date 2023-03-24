@@ -29,7 +29,9 @@ class OrderController extends Controller
 
     /**
      * Create order
+     *
      * @param CreateOrderRequest $request
+     *
      * @return View
      */
     public function create(CreateOrderRequest $request): View
@@ -39,7 +41,7 @@ class OrderController extends Controller
             'product' => $product,
             'quantity' => $request->quantity,
             'amount' => $request->quantity * $product->price,
-            'email' => $request->email
+            'email' => $request->email,
         ]);
     }
 
@@ -47,6 +49,7 @@ class OrderController extends Controller
      * Checkout order
      *
      * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function checkout(Request $request): RedirectResponse

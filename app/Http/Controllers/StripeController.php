@@ -16,22 +16,26 @@ class StripeController extends Controller
     ) {
     }
 
+    /**
+     * Fetch stripe public key
+     *
+     * @return array
+     */
     public function fetchStripePublicKey(): array
     {
-        return [
-            'key' => config('services.stripe.api_key')
-        ];
+        return ['key' => config('services.stripe.api_key')];
     }
 
     /**
      * Create payment intent
      *
      * @param CreatePaymentIntentRequest $request
+     *
      * @return JsonResponse
      */
     public function createPaymentIntent(CreatePaymentIntentRequest $request): JsonResponse
     {
-        $response = $this->stripeAdapter->createPaymentIntent($request->amount, $request->amount_received);
-        return response()->json(["clientSecret" => $response->client_secret]);
+        $response = $this->stripeAdapter->createPaymentIntent($request->amount);
+        return response()->json(['clientSecret' => $response->client_secret]);
     }
 }
