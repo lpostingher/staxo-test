@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     public const NO_IMAGE_PATH = '/img/no_image.png';
 

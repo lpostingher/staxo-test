@@ -25,7 +25,7 @@ if ($(".stripe").length) {
 
 async function initialize() {
     emailAddress = $('input[name="email"]').val();
-    const {clientSecret} = await fetch("/order/createPaymentIntent", {
+    const {clientSecret} = await fetch("/stripe/createPaymentIntent", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

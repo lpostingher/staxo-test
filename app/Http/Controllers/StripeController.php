@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Adapters\StripeAdapterInterface;
+use App\Http\Requests\CreatePaymentIntentRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -27,10 +28,10 @@ class StripeController extends Controller
     /**
      * Create payment intent
      *
-     * @param Request $request
+     * @param CreatePaymentIntentRequest $request
      * @return JsonResponse
      */
-    public function createPaymentIntent(Request $request): JsonResponse
+    public function createPaymentIntent(CreatePaymentIntentRequest $request): JsonResponse
     {
         $response = $this->stripeAdapter->createPaymentIntent($request->amount);
         return response()->json($response);
