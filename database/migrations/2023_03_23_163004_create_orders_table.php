@@ -17,6 +17,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->integer('quantity');
             $table->decimal('amount', 15, 2);
+            $table->decimal('amount_received', 15, 2)->nullable();
             $table->string('email', 255);
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');

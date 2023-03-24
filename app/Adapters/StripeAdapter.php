@@ -2,8 +2,10 @@
 
 namespace App\Adapters;
 
+use Illuminate\Support\Facades\Log;
 use Stripe\Exception\ApiErrorException;
 use Stripe\PaymentIntent;
+use Stripe\PaymentMethod;
 use Stripe\Stripe;
 
 /**
@@ -19,22 +21,49 @@ class StripeAdapter implements StripeAdapterInterface
     /**
      * @inheritDoc
      */
-    public function createPaymentIntent(float $amount): array
+    public function createPaymentIntent(float $amount): PaymentIntent
     {
+
         try {
-            $intent = PaymentIntent::create([
+            return PaymentIntent::create([
                 'amount' => $amount * 100,
                 'currency' => 'usd',
-                "payment_method_types" => [
-                    "card"
-                ],
             ]);
         } catch (ApiErrorException $e) {
-            return ['error' => $e->getMessage()];
+            Log::error($e->getMessage());
+        }
+        return new PaymentIntent();
+    }
+
+    public function confirmPaymentIntent(PaymentIntent $paymentIntent, PaymentMethod $paymentMethod): PaymentIntent
+    {
+        if (!$paymentIntent->id) {
+            return new PaymentIntent();
         }
 
-        return [
-            'clientSecret' => $intent->client_secret,
-        ];
+        try {
+            return $paymentIntent->confirm(['payment_method' => $paymentMethod->id]);
+        } catch (ApiErrorException $e) {
+            Log::error($e->getMessage());
+        }
+
+        return new PaymentIntent();
+    }
+
+    public function getPaymentMethod(): PaymentMethod
+    {
+        $method = PaymentMethod::all()->first();
+        if (!$method) {
+            $method = PaymentMethod::create([
+                'type' => 'card',
+                'card' => [
+                    'number' => '4242424242424242',
+                    'exp_month' => 8,
+                    'exp_year' => 2050,
+                    'cvc' => '314',
+                ],
+            ]);
+        }
+        return $method;
     }
 }

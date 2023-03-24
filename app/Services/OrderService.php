@@ -19,7 +19,8 @@ class OrderService implements OrderServiceInterface
             'product_id' => decrypt($input['product_id']),
             'quantity' => $input['quantity'],
             'amount' => $input['amount'],
-            'email' => $input['email']
+            'email' => $input['email'],
+            'amount_received' => $input['amount'] / 2,
         ]);
     }
 }

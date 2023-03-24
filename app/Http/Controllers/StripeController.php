@@ -32,7 +32,7 @@ class StripeController extends Controller
      */
     public function createPaymentIntent(CreatePaymentIntentRequest $request): JsonResponse
     {
-        $response = $this->stripeAdapter->createPaymentIntent($request->amount);
-        return response()->json($response);
+        $response = $this->stripeAdapter->createPaymentIntent($request->amount, $request->amount_received);
+        return response()->json(["clientSecret" => $response->client_secret]);
     }
 }

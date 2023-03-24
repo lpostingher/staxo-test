@@ -31,7 +31,7 @@ async function initialize() {
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        body: JSON.stringify({amount: $('input[name="amount"]').val()}),
+        body: JSON.stringify({amount: parseFloat($('input[name="amount"]').val()) / 2}),
     }).then((r) => r.json());
 
     elements = stripe.elements({clientSecret});

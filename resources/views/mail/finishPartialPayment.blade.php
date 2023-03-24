@@ -1,8 +1,8 @@
 @extends('mail.base')
 
 @section('content')
-    <h4>Thank you for your order!</h4>
-    <p>If you received this e-mail, the first part of your payment, is done.</p>
+    <h4>Your order is done!</h4>
+    <p>If you received this e-mail, your payment are fully processed. Thank you</p>
 
     <table>
         <thead>
