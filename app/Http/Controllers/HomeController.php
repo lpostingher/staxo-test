@@ -10,8 +10,7 @@ class HomeController extends Controller
 {
     public function __construct(
         private readonly ProductService $productService
-    )
-    {
+    ) {
     }
 
     /**

@@ -19,8 +19,7 @@ class FinishPartialPaymentMail extends Mailable
      */
     public function __construct(
         public readonly Order $order
-    )
-    {
+    ) {
         //
     }
 

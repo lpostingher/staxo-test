@@ -18,8 +18,7 @@ class FinishCheckoutMail extends Mailable
      */
     public function __construct(
         public Order $order
-    )
-    {
+    ) {
         //
     }
 

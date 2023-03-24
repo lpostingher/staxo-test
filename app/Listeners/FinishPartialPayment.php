@@ -23,8 +23,7 @@ class FinishPartialPayment implements ShouldQueue
      */
     public function __construct(
         private StripeAdapterInterface $stripeAdapter
-    )
-    {
+    ) {
     }
 
     /**

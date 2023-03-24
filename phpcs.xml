@@ -7,4 +7,8 @@
     <file>tests/</file>
     <file>routes/</file>
 
+    <rule ref="PSR1.Methods.CamelCapsMethodName">
+        <exclude-pattern>./tests/*</exclude-pattern>
+    </rule>
+
 </ruleset>

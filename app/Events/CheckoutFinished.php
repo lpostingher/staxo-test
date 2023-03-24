@@ -18,8 +18,7 @@ class CheckoutFinished
      */
     public function __construct(
         public Order $order
-    )
-    {
+    ) {
         //
     }
 

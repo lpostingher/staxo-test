@@ -13,8 +13,7 @@ class StripeController extends Controller
      */
     public function __construct(
         private readonly StripeAdapterInterface $stripeAdapter,
-    )
-    {
+    ) {
     }
 
     public function fetchStripePublicKey(): array

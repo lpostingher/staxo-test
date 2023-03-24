@@ -24,8 +24,7 @@ class OrderController extends Controller
     public function __construct(
         private readonly ProductServiceInterface $productService,
         private readonly OrderServiceInterface   $orderService,
-    )
-    {
+    ) {
     }
 
     /**

@@ -32,7 +32,6 @@ class StoreProductRequestTest extends TestCase
                 'The image field must be a file of type: jpg, png, jpeg, gif, svg.',
             ],
         ], $validator->errors()->toArray());
-
     }
 
     /**
@@ -43,5 +42,4 @@ class StoreProductRequestTest extends TestCase
         parent::setUp();
         $this->instance = new StoreProductRequest();
     }
-
 }
