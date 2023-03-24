@@ -7,8 +7,14 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 
-class ProductService
+/**
+ * @inheritDoc
+ */
+class ProductService implements ProductServiceInterface
 {
+    /**
+     * @inheritDoc
+     */
     public function getList(array $filter): LengthAwarePaginator
     {
         $query = Product::query();
@@ -23,7 +29,10 @@ class ProductService
         return $query->paginate(10);
     }
 
-    public function updateById(int $id, array $input, ?UploadedFile $image)
+    /**
+     * @inheritDoc
+     */
+    public function updateById(int $id, array $input, ?UploadedFile $image): void
     {
         if ($image) {
             $input['image_path'] = $this->handleImage(encrypt($id), $image);
@@ -38,7 +47,10 @@ class ProductService
         return $path;
     }
 
-    public function removeImage(int $id)
+    /**
+     * @inheritDoc
+     */
+    public function removeImage(int $id): void
     {
         $product = $this->getById($id);
         if (!$product->image_path) {
@@ -48,18 +60,27 @@ class ProductService
         $product->update(['image_path' => null]);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getById(int $id): Product
     {
         return Product::where('id', $id)->firstOrFail();
     }
 
-    public function destroy(int $id)
+    /**
+     * @inheritDoc
+     */
+    public function destroy(int $id): void
     {
         $product = $this->getById($id);
         $product->delete();
     }
 
-    public function store(array $input, ?UploadedFile $image)
+    /**
+     * @inheritDoc
+     */
+    public function store(array $input, ?UploadedFile $image): void
     {
         $product = Product::create($input);
         if ($image) {
@@ -69,6 +90,9 @@ class ProductService
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function create(): Product
     {
         return Product::make(['price' => 0]);

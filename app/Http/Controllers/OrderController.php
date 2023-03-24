@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Events\CheckoutFinished;
-use App\Facades\StripeFacade;
 use App\Http\Requests\CreateOrderRequest;
-use App\Http\Requests\StoreOrderRequest;
 use App\Services\OrderService;
+use App\Services\OrderServiceInterface;
 use App\Services\ProductService;
+use App\Services\ProductServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -17,9 +17,13 @@ use Illuminate\View\View;
  */
 class OrderController extends Controller
 {
+    /**
+     * @param ProductService $productService
+     * @param OrderService $orderService
+     */
     public function __construct(
-        private readonly ProductService $productService,
-        private readonly OrderService   $orderService
+        private readonly ProductServiceInterface $productService,
+        private readonly OrderServiceInterface   $orderService,
     )
     {
     }
@@ -38,17 +42,6 @@ class OrderController extends Controller
             'amount' => $request->quantity * $product->price,
             'email' => $request->email
         ]);
-    }
-
-    /**
-     * Store order
-     *
-     * @param StoreOrderRequest $request
-     * @return void
-     */
-    public function store(StoreOrderRequest $request)
-    {
-
     }
 
     /**
@@ -74,11 +67,5 @@ class OrderController extends Controller
     public function finishCheckout(): View
     {
         return view('order.finishCheckout');
-    }
-
-    public function createPaymentIntent(Request $request)
-    {
-        $response = StripeFacade::createPaymentIntent($request->amount);
-        return response()->json($response);
     }
 }

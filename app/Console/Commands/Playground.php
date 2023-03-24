@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Events\CheckoutFinished;
-use App\Facades\StripeFacade;
 use App\Models\Order;
 use Illuminate\Console\Command;
 

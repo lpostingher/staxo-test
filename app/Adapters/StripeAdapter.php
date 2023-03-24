@@ -4,19 +4,22 @@ namespace App\Adapters;
 
 use Stripe\Exception\ApiErrorException;
 use Stripe\PaymentIntent;
+use Stripe\Stripe;
 
 /**
- * Stripe Adapter
+ * @inheritDoc
  */
-class StripeAdapter
+class StripeAdapter implements StripeAdapterInterface
 {
+    public function __construct()
+    {
+        Stripe::setApiKey(config('services.stripe.api_secret_key'));
+    }
+
     /**
-     * Create payment intent
-     *
-     * @param int $amount
-     * @return array
+     * @inheritDoc
      */
-    public function createPaymentIntent(int $amount): array
+    public function createPaymentIntent(float $amount): array
     {
         try {
             $intent = PaymentIntent::create([

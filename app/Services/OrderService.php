@@ -4,8 +4,15 @@ namespace App\Services;
 
 use App\Models\Order;
 
-class OrderService
+/**
+ * @inheritDoc
+ */
+class OrderService implements OrderServiceInterface
 {
+
+    /**
+     * @inheritDoc
+     */
     public function checkout(array $input): Order
     {
         return Order::factory()->create([

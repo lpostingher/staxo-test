@@ -34,7 +34,7 @@ class CreateOrderRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'product_id' => decrypt($this->product_id)
+            'product_id' => $this->product_id ? decrypt($this->product_id) : '',
         ]);
     }
 }

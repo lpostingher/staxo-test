@@ -3,9 +3,12 @@
 namespace App\Providers;
 
 use App\Adapters\StripeAdapter;
-use GuzzleHttp\Client;
+use App\Adapters\StripeAdapterInterface;
+use App\Services\OrderService;
+use App\Services\OrderServiceInterface;
+use App\Services\ProductService;
+use App\Services\ProductServiceInterface;
 use Illuminate\Support\ServiceProvider;
-use Stripe\Stripe;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,12 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind('stripe', function () {
-            Stripe::setApiKey(config('services.stripe.api_secret_key'));
-
-            return new StripeAdapter();
-        });
-
+        $this->app->bind(StripeAdapterInterface::class, StripeAdapter::class);
+        $this->app->bind(OrderServiceInterface::class, OrderService::class);
+        $this->app->bind(ProductServiceInterface::class, ProductService::class);
     }
 
     /**
