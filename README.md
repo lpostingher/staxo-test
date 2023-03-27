@@ -86,3 +86,12 @@ For code quality the project use these libraries:
 
 There is a custom composer command that execute a command chain to help developer keep the code quality. This command is configured at `composer.json` file.
 > composer check
+
+### Sample data
+Is possible to generate some sample data with database seed.
+> php artisan migrate --seed
+
+This seed will generate som products and an account to sign in into `Restricted area`. An account with following information will be generated.
+> E-mail: account@example.com
+> 
+> Password: password
